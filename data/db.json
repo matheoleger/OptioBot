@@ -1,0 +1,20 @@
+{
+  "games": [
+    {
+      "type": "currently free",
+      "title": "BioShock: The Collection",
+      "id": "cbd0323b4f5147f5ac66eb9b8c256bcc",
+      "image": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/EN_2K_Bioshock_ The Collection_S1_2560x1440_2560x1440-e9e66f8882e2faf56fd81eddab41dc55",
+      "startDate": "2022-05-26T15:00:00.000Z",
+      "endDate": "2022-06-02T15:00:00.000Z"
+    },
+    {
+      "type": "coming soon",
+      "title": "Mystery Game",
+      "id": "1d41b93230e54bdd80c559d72adb7f4f",
+      "image": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-tease-generic-promo-1920x1080_1920x1080-f7742c265e217510835ed14e04c48b4b",
+      "startDate": "2022-06-02T15:00:00.000Z",
+      "endDate": "2022-06-09T15:00:00.000Z"
+    }
+  ]
+}

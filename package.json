@@ -1,0 +1,26 @@
+{
+  "name": "optiobot",
+  "version": "1.0.0",
+  "description": "A bot for the server of \"La guilde de Smoowy\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matheoleger/OptioBot.git"
+  },
+  "author": "Smoowy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matheoleger/OptioBot/issues"
+  },
+  "homepage": "https://github.com/matheoleger/OptioBot#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "discord.js": "^13.7.0",
+    "dotenv": "^16.0.1",
+    "lowdb": "github:dankreiger/lowdb#chore/esm-cjs-hybrid-WITH-LIB"
+  }
+}
