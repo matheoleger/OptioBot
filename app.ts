@@ -1,23 +1,17 @@
-// require("dotenv").config();
 import * as dotenv from "dotenv";
 import * as Discord from "discord.js"
+import {optioBot} from "./src/utils/discordBotServices"
 
 import {getFreeGameFromEpic} from "./src/getFreeGame";
 
 dotenv.config();
-
-const client = new Discord.Client({
-    intents: [
-      Discord.Intents.FLAGS.GUILDS,
-    ]
-});
   
 const token = process.env.DISCORD_TOKEN;
 
-client.on('ready', () => {
-    console.log(`Logged in as ${client!.user!.tag}!`);
+optioBot.on('ready', () => {
+    console.log(`Logged in as ${optioBot!.user!.tag}!`);
     getFreeGameFromEpic();
 });
 
-client.login(token);
+optioBot.login(token);
 

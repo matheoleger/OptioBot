@@ -1,10 +1,17 @@
 {
+  "servers": [
+    {
+      "name": "La Guilde de Smoowy",
+      "serverID": "928046024843493456",
+      "freeGameChannelID": "979325486574477312"
+    }
+  ],
   "games": [
     {
       "type": "currently free",
       "title": "BioShock: The Collection",
       "id": "cbd0323b4f5147f5ac66eb9b8c256bcc",
-      "image": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/EN_2K_Bioshock_ The Collection_S1_2560x1440_2560x1440-e9e66f8882e2faf56fd81eddab41dc55",
+      "image": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/EN_2K_Bioshock_%20The%20Collection_S1_2560x1440_2560x1440-e9e66f8882e2faf56fd81eddab41dc55",
       "startDate": "2022-05-26T15:00:00.000Z",
       "endDate": "2022-06-02T15:00:00.000Z"
     },
