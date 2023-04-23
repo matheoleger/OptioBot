@@ -55,6 +55,12 @@ optioBot.on(Events.InteractionCreate, async (interaction: any) => { //TODO: Exte
 		if(interaction.commandName === "ping") {
 			interaction.reply("Pong!")
 		} else if (interaction.commandName === "get_free_game") {
+
+			if(interaction.channelId !== "928407823145136149") {
+				interaction.reply({content: "Pour éviter le spam des autres salons, cette commande n'est autorisé que dans le salon <#928407823145136149> :wink:", ephemeral: true})
+				return;
+			}
+
 			const messages = await getFreeGameMessages()
 			console.log({messages});
 			interaction.reply({embeds: messages})
