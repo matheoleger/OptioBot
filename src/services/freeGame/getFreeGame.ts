@@ -36,7 +36,7 @@ export const getFreeGameMessages = async () => {
 
     const freeGamesData = await changeDataOfDB(games);
 
-    const messages = freeGamesData.map((game) => freeGameMessage(game.title, game.image, game.startDate, game.endDate))
+    const messages = freeGamesData.map((game) => freeGameMessage(game.title, game.id, game.image, game.startDate, game.endDate))
 
     return messages;
 }

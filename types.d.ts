@@ -10,5 +10,14 @@
 type DataFromDB = {
     // [index: string]: Function|string|number,
     servers: {[key: string]: string}[]
-    games: {[key: string]: unknown}[],
+    games: Game[],
+}
+
+type Game = {
+    type: string,
+    title: string,
+    id: string,
+    image: string,
+    startDate: string,
+    endDate: string
 }

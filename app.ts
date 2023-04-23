@@ -18,21 +18,11 @@ optioBot.on('ready', () => {
     getFreeGameFromEpic();
 });
 
-// optioBot.commands = new Collection();
-
 const commands = [];
 
 commands.push(pingCommand.data.toJSON());
 commands.push(getFreeGameCommand.data.toJSON());
-
-// (optioBot as any).commands = new Collection();
-
-// (optioBot as any).commands.set(getFreeGameCommand.data.name, getFreeGameCommand)
-// (optioBot as any).commands.set(pingCommand.data.name, pingCommand)
-
-// optioBot.on(Events.InteractionCreate, interaction => {
-// 	console.log(interaction);
-// });
+// commands.push(getUpcomingFreeGameCommand.data.toJSON());
 
 // https://discordjs.guide/creating-your-bot/command-deployment.html#guild-commands
 
@@ -67,12 +57,12 @@ optioBot.on(Events.InteractionCreate, async (interaction: any) => { //TODO: Exte
 		} else if (interaction.commandName === "get_free_game") {
 			const messages = await getFreeGameMessages()
 			console.log({messages});
-			messages.forEach(message => console.log(message.data))
 			interaction.reply({embeds: messages})
 		}
 
-	} catch (err) {
-		console.error(err);
+	} catch (err: any) {
+		// console.error(err);
+		console.error(err.rawError.errors.data.embeds);
 	}
 
 });

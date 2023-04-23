@@ -1,9 +1,9 @@
 import { APIEmbed, EmbedBuilder, EmbedType } from "discord.js";
 import {dateToFrenchLanguage} from "../utils/utils"
 
-export const freeGameMessage = (name: string, image: string, startDate: string, endDate: string) => {
+export const freeGameMessage = (name: string, id: string, image: string, startDate: string, endDate: string) => {
     const message = new EmbedBuilder()
-                    .setTitle(`**${name}** gratuit sur Epic !`)
+                    .setTitle(`**${name}** est gratuit sur Epic !`)
                     .setDescription(`Et oui, pas besoin de dépenser de l'argent pour jouer à **${name}** ! (clique sur le titre au dessus pour y accéder)`)
                     .setColor(0x600273)
                     .setImage(image)
@@ -20,7 +20,7 @@ export const freeGameMessage = (name: string, image: string, startDate: string, 
                             inline: true
                         }
                     ],)
-                    .setURL(`https://store.epicgames.com/fr/free-games`)
+                    .setURL(`https://store.epicgames.com/fr/free-games?game=${id}`)
 
     return message;
 };

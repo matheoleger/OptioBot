@@ -11,9 +11,7 @@ const db = new Low(adapter)
 export const sendFreeGameMessage = async () => {
     await db.read()
 
-    if(db.data == null || db.data == undefined) {
-        return;
-    }
+    if(!db.data) return;
 
     db.data.servers.forEach((server: any) => {
         const guild = optioBot.guilds.cache.get(server.serverID);
@@ -21,18 +19,15 @@ export const sendFreeGameMessage = async () => {
 
         if(!channel) return;
 
-        if(channel.type == ChannelType.GuildText && db.data != null && db.data != undefined) {
+        if(channel.type == ChannelType.GuildText && db.data) {
             sendEachGameToChannel(channel, db.data.games)
         }
     })
 }
 
-const sendEachGameToChannel = (channel: TextChannel, games: {[key: string]: unknown}[]) => {
+const sendEachGameToChannel = (channel: TextChannel, games: Game[]) => {
     games.forEach(game => {
-
         //TODO: Refacto here
-        if(game.type == "currently free" && typeof game.title == "string" && typeof game.image == "string" && typeof game.startDate == "string" && typeof game.endDate == "string") {
-            channel.send({embeds: [freeGameMessage(game.title, game.image, game.startDate, game.endDate)]});
-        }
+        channel.send({embeds: [freeGameMessage(game.title, game.id, game.image, game.startDate, game.endDate)]});
     })
 }
