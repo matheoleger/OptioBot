@@ -19,7 +19,7 @@
   "homepage": "https://github.com/matheoleger/OptioBot#readme",
   "dependencies": {
     "axios": "^0.27.2",
-    "discord.js": "^13.7.0",
+    "discord.js": "^14.9.0",
     "dotenv": "^16.0.1",
     "lowdb": "github:dankreiger/lowdb#chore/esm-cjs-hybrid-WITH-LIB"
   }

@@ -9,19 +9,35 @@
   "games": [
     {
       "type": "currently free",
-      "title": "BioShock: The Collection",
-      "id": "cbd0323b4f5147f5ac66eb9b8c256bcc",
-      "image": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/EN_2K_Bioshock_%20The%20Collection_S1_2560x1440_2560x1440-e9e66f8882e2faf56fd81eddab41dc55",
-      "startDate": "2022-05-26T15:00:00.000Z",
-      "endDate": "2022-06-02T15:00:00.000Z"
+      "title": "Beyond Blue",
+      "id": "c3006006e4c74c4d8316ff09fb8dcc8d",
+      "image": "https://cdn1.epicgames.com/bd9fd28ca1214868922f2ab41d6d3b65/offer/EGS_BeyondBlue_ELineMedia_S1-2560x1440-5d205f1273f6b805db82bc525a1432b9.jpg",
+      "startDate": "2023-04-20T15:00:00.000Z",
+      "endDate": "2023-04-27T15:00:00.000Z"
     },
     {
       "type": "coming soon",
-      "title": "Mystery Game",
-      "id": "1d41b93230e54bdd80c559d72adb7f4f",
-      "image": "https://cdn1.epicgames.com/offer/d5241c76f178492ea1540fce45616757/egs-vault-tease-generic-promo-1920x1080_1920x1080-f7742c265e217510835ed14e04c48b4b",
-      "startDate": "2022-06-02T15:00:00.000Z",
-      "endDate": "2022-06-09T15:00:00.000Z"
+      "title": "Breathedge",
+      "id": "8401414902e84f2cb9afa9142f051d32",
+      "image": "https://cdn1.epicgames.com/08ae29e4f70a4b62aa055e383381aa82/offer/EGS_Breathedge_RedRuinsSoftworks_S2-1200x1600-c0559585221ea11c9d48273c3a79b1ba.jpg",
+      "startDate": "2023-04-27T15:00:00.000Z",
+      "endDate": "2023-05-04T15:00:00.000Z"
+    },
+    {
+      "type": "currently free",
+      "title": "Never Alone (Kisima Ingitchuna)",
+      "id": "0cd43717a2224f33bb9a95f01d303474",
+      "image": "https://cdn1.epicgames.com/offer/b13f6a1e5121469d8a825947b759339d/EGS_NeverAloneKisimaIngitchuna_UpperOneGamesELineMedia_S2_1200x1600-f1c99ff9638dd36c65e87dedcbb564f1",
+      "startDate": "2023-04-20T15:00:00.000Z",
+      "endDate": "2023-04-27T15:00:00.000Z"
+    },
+    {
+      "type": "coming soon",
+      "title": "Poker Club",
+      "id": "b18baf5b2a18423493139ef9974dbbe3",
+      "image": "https://cdn1.epicgames.com/spt-assets/560813614bba464385b56f43524d17f0/download-poker-club-offer-16wlj.jpg",
+      "startDate": "2023-04-27T15:00:00.000Z",
+      "endDate": "2023-05-04T15:00:00.000Z"
     }
   ]
 }

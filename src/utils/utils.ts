@@ -1,3 +1,10 @@
+import { Low, JSONFile } from 'lowdb'
+
+// Use JSON file for storage
+const file = "./data/db.json";
+const adapter = new JSONFile<DataFromDB>(file)
+export const db = new Low(adapter)
+
 export const dateToFrenchLanguage = (date: string): string => {
 
     const formatDate = new Date(date);
