@@ -1,6 +1,7 @@
 import {TextChannel} from "discord.js"
 import { Low, JSONFile } from 'lowdb'
 import { fileURLToPath } from 'url'
+import { isEqual } from "lodash"
 
 import {freeGameMessage} from "../../templates/freeGameMessage"
 import { getFreeGameFromEpic } from "../../utils/api"
@@ -10,17 +11,20 @@ const file = "./data/db.json";
 const adapter = new JSONFile<DataFromDB>(file)
 const db = new Low(adapter)
 
-export const getFreeGameMessages = async () => {
+export const getFreeGameMessages = async (option: string) => {
 
-    //TODO: Verify is the date of games in DB corresponding to the date of today (or before) to avoid to get data again. 
+    //TODO: Verify is the date of games in DB corresponding to the date of today (or before) to avoid to get data again. (we can get the current free game date to know when we need to get data again)
     const games = await getFreeGameFromEpic();
 
     const isSameData = await getIsSameFreeGame(games);
 
-    //TODO: Verify isSameData
-    const freeGamesData = await changeDataOfDB(games);
+    const freeGamesData = (isSameData) ? games : await changeDataOfDB(games);
 
-    const messages = freeGamesData.map((game) => freeGameMessage(game.title, game.id, game.image, game.startDate, game.endDate))
+    const messages = freeGamesData.map((game: Game) => freeGameMessage(game.title, game.id, game.image, game.startDate, game.endDate))
+
+    // let messages: Game[] = []
+
+
 
     return messages;
 }
@@ -29,24 +33,19 @@ const getIsSameFreeGame = async (freeGames: any[]) => {
     await db.read();
     console.log(db.data);
 
-    if(!db.data) return;
+    if(!db.data) return false;
 
     const gamesFromDB = db.data.games
 
-    freeGames.filter((game) => gamesFromDB.includes(game))
+    // freeGames.filter((game) => gamesFromDB.includes(game))
+
+    return isEqual(gamesFromDB, freeGames)
 }
 
 const changeDataOfDB = async (freeGames: {[key: string]: any}[]) => {
     db.data!.games = [];
 
-    let essentialDataOfFreeGames: { //Refacto types
-        type: string,
-        title: string,
-        id: string,
-        image: string,
-        startDate: string,
-        endDate: string,
-    }[] = []
+    let essentialDataOfFreeGames: Game[] = []
 
     freeGames.forEach((game) => { //TODO: change to .map(), refacto types
         let essentialData: Game = {

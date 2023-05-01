@@ -8,6 +8,7 @@ import { getFreeGameCommand } from "./src/commands/freeGame";
 import { Collection, Events, REST, Routes } from "discord.js";
 import { pingCommand } from "./src/commands/ping";
 import { getFreeGameMessages } from "./src/services/freeGame/getFreeGame";
+import { trollCommand } from "./src/commands/troll";
 
 dotenv.config();
   
@@ -22,7 +23,7 @@ const commands = [];
 
 commands.push(pingCommand.data.toJSON());
 commands.push(getFreeGameCommand.data.toJSON());
-// commands.push(getUpcomingFreeGameCommand.data.toJSON());
+commands.push(trollCommand.data.toJSON());
 
 // https://discordjs.guide/creating-your-bot/command-deployment.html#guild-commands
 
@@ -47,28 +48,28 @@ const rest = new REST().setToken(token);
 })();
 
 optioBot.on(Events.InteractionCreate, async (interaction: any) => { //TODO: Extends type because WTF
-    // interaction.reply("Pong!")
-	console.log(interaction.commandName);
-
 	try {
 
 		if(interaction.commandName === "ping") {
 			interaction.reply("Pong!")
 		} else if (interaction.commandName === "get_free_game") {
 
-			if(interaction.channelId !== "928407823145136149") {
+			if(interaction.channelId !== "928407823145136149") { // TODO: set constant instead of string here
 				interaction.reply({content: "Pour éviter le spam des autres salons, cette commande n'est autorisé que dans le salon <#928407823145136149> :wink:", ephemeral: true})
 				return;
 			}
 
-			const messages = await getFreeGameMessages()
-			console.log({messages});
+			const option = interaction.options.getString("category");
+
+			const messages = await getFreeGameMessages(option)
+
 			interaction.reply({embeds: messages})
+		} else if (interaction.commandName == "aquandunenouvellevideo") {
+			interaction.reply("Bah ptdr tu crois quoi toi ? Une vidéo ça ce travail !")
 		}
 
 	} catch (err: any) {
-		// console.error(err);
-		console.error(err.rawError.errors.data.embeds);
+		console.error(err);
 	}
 
 });
