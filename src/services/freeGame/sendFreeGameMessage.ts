@@ -28,6 +28,6 @@ export const sendFreeGameMessage = async () => {
 const sendEachGameToChannel = (channel: TextChannel, games: Game[]) => {
     games.forEach(game => {
         //TODO: Refacto here
-        channel.send({embeds: [freeGameMessage(game.title, game.id, game.image, game.startDate, game.endDate)]});
+        channel.send({embeds: [freeGameMessage(game.title, game.id, game.image, game.startDate, game.endDate, game.category)]});
     })
 }

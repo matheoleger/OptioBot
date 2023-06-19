@@ -8,36 +8,36 @@
   ],
   "games": [
     {
-      "type": "currently free",
-      "title": "Beyond Blue",
-      "id": "c3006006e4c74c4d8316ff09fb8dcc8d",
-      "image": "https://cdn1.epicgames.com/bd9fd28ca1214868922f2ab41d6d3b65/offer/EGS_BeyondBlue_ELineMedia_S1-2560x1440-5d205f1273f6b805db82bc525a1432b9.jpg",
-      "startDate": "2023-04-20T15:00:00.000Z",
-      "endDate": "2023-04-27T15:00:00.000Z"
+      "category": "upcoming_free_games",
+      "title": "Idle Champions of the Forgotten Realms",
+      "id": "a9748abde1c94b66aae5250bb9fc5503",
+      "image": "https://cdn1.epicgames.com/offer/7e508f543b05465abe3a935960eb70ac/IdleChampions_FreeGamesPromo_1200x16001_1200x1600-764258f78394b9f79815bbd9010e8454",
+      "startDate": "2023-06-22T15:00:00.000Z",
+      "endDate": "2023-06-29T15:00:00.000Z"
     },
     {
-      "type": "coming soon",
-      "title": "Breathedge",
-      "id": "8401414902e84f2cb9afa9142f051d32",
-      "image": "https://cdn1.epicgames.com/08ae29e4f70a4b62aa055e383381aa82/offer/EGS_Breathedge_RedRuinsSoftworks_S2-1200x1600-c0559585221ea11c9d48273c3a79b1ba.jpg",
-      "startDate": "2023-04-27T15:00:00.000Z",
-      "endDate": "2023-05-04T15:00:00.000Z"
+      "category": "upcoming_free_games",
+      "title": "theHunter: Call of the Wild™",
+      "id": "7b0d120a875547e9bec70192ddcc96e2",
+      "image": "https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_theHunterCalloftheWild_ExpansiveWorlds_S2_1200x1600-1e9b46aaabc33fe0a08cf5b418e76ba2",
+      "startDate": "2023-06-22T15:00:00.000Z",
+      "endDate": "2023-06-29T15:00:00.000Z"
     },
     {
-      "type": "currently free",
-      "title": "Never Alone (Kisima Ingitchuna)",
-      "id": "0cd43717a2224f33bb9a95f01d303474",
-      "image": "https://cdn1.epicgames.com/offer/b13f6a1e5121469d8a825947b759339d/EGS_NeverAloneKisimaIngitchuna_UpperOneGamesELineMedia_S2_1200x1600-f1c99ff9638dd36c65e87dedcbb564f1",
-      "startDate": "2023-04-20T15:00:00.000Z",
-      "endDate": "2023-04-27T15:00:00.000Z"
+      "category": "currently_free_games",
+      "title": "Guacamelee! Super Turbo Championship Edition",
+      "id": "825a2a7eb70b458ab5b3cd9f5b3fa014",
+      "image": "https://cdn1.epicgames.com/spt-assets/7041a1ca4ed543459b95d78887047bd9/guacamelee-stce-ztldk.jpg",
+      "startDate": "2023-06-15T15:00:00.000Z",
+      "endDate": "2023-06-22T15:00:00.000Z"
     },
     {
-      "type": "coming soon",
-      "title": "Poker Club",
-      "id": "b18baf5b2a18423493139ef9974dbbe3",
-      "image": "https://cdn1.epicgames.com/spt-assets/560813614bba464385b56f43524d17f0/download-poker-club-offer-16wlj.jpg",
-      "startDate": "2023-04-27T15:00:00.000Z",
-      "endDate": "2023-05-04T15:00:00.000Z"
+      "category": "currently_free_games",
+      "title": "Guacamelee! 2",
+      "id": "f7aa0e57c2b94acd97a28a7ec99a7ded",
+      "image": "https://cdn1.epicgames.com/spt-assets/b05acd7d28d34f6d93a961b0e53ddf0b/guacamelee-2-1lym2.jpg",
+      "startDate": "2023-06-15T15:00:00.000Z",
+      "endDate": "2023-06-22T15:00:00.000Z"
     }
   ]
 }

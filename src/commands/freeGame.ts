@@ -12,9 +12,9 @@ export const getFreeGameCommand = {
                 .setDescription('Jeux actuellement gratuit ou prochainement gratuit ?')
                 .setRequired(true)
                 .addChoices(
-                    { name: 'Tous les jeux', value: 'all_free_game' },
-                    { name: 'Actuellement gratuit', value: 'current_free_game' },
-                    { name: 'Prochainement gratuit', value: 'upcoming_free_game' },
+                    { name: 'Tous les jeux', value: 'all_free_games' },
+                    { name: 'Actuellement gratuit', value: 'currently_free_games' },
+                    { name: 'Prochainement gratuit', value: 'upcoming_free_games' },
                 ))
     // async execute(interaction: any) {
     //     await interaction.reply(await getFreeGameMessages())

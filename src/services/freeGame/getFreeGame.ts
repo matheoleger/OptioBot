@@ -29,14 +29,21 @@ const db = new Low(adapter)
 //     return games;
 // } 
 
-export const getFreeGameMessages = async () => {
+export const getFreeGameMessages = async (choice: FreeGameCommandChoice) => {
     const games = await getFreeGameFromEpic();
 
     const isSameData = await getIsSameFreeGame(games);
 
     const freeGamesData = await changeDataOfDB(games);
 
-    const messages = freeGamesData.map((game) => freeGameMessage(game.title, game.id, game.image, game.startDate, game.endDate))
+    const filteredFreeGames = freeGamesData.filter(game => {
+
+        if(choice == "all_free_games") return true;
+
+        return game.category == choice;
+    })
+
+    const messages = filteredFreeGames.map((game) => freeGameMessage(game.title, game.id, game.image, game.startDate, game.endDate, game.category))
 
     return messages;
 }
@@ -71,21 +78,14 @@ const getIsSameFreeGame = async (freeGames: any[]) => {
 const changeDataOfDB = async (freeGames: {[key: string]: any}[]) => {
     db.data!.games = [];
 
-    let essentialDataOfFreeGames: { //Refacto types
-        type: string,
-        title: string,
-        id: string,
-        image: string,
-        startDate: string,
-        endDate: string,
-    }[] = []
+    let essentialDataOfFreeGames: Game[] = []
 
     freeGames.forEach((game) => { //TODO: change to .map(), refacto types
-        let essentialData = {
-            type: "",
+        let essentialData: Game = {
+            category: "currently_free_games",
             title: game.title as string,
             id: game.id as string,
-            image: game.keyImages[2].url.split(" ").join("%20") as string,
+            image: getImage(game.keyImages),
             startDate: "",
             endDate: "",
         }
@@ -95,11 +95,11 @@ const changeDataOfDB = async (freeGames: {[key: string]: any}[]) => {
         if(game.promotions.upcomingPromotionalOffers.length) {
             essentialData.startDate = game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].startDate
             essentialData.endDate = game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].endDate
-            essentialData.type = "coming soon"
+            essentialData.category = "upcoming_free_games"
         } else {
             essentialData.startDate = game.promotions.promotionalOffers[0].promotionalOffers[0].startDate
             essentialData.endDate = game.promotions.promotionalOffers[0].promotionalOffers[0].endDate
-            essentialData.type = "currently free"           
+            essentialData.category = "currently_free_games"           
         }
 
         essentialDataOfFreeGames.push(essentialData)
@@ -109,4 +109,22 @@ const changeDataOfDB = async (freeGames: {[key: string]: any}[]) => {
     await db.write()
 
     return essentialDataOfFreeGames;
+}
+
+const getImage = (keyImages: ImageFromEpic[]) => {
+    let image = keyImages.find(image => {
+        if (image.type = "OfferImageWide") {
+            return true;
+        } else if (image.type = "OfferImageTall") {
+            return true;
+        } else if (image.type = "Thumbnail") {
+            return true;
+        } else if (image.type = "VaultClosed") {
+            return true;
+        }
+    })
+
+    if(!image) image = keyImages[0];
+
+    return image.url.split(" ").join("%20");
 }

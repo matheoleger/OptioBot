@@ -46,26 +46,43 @@ const rest = new REST().setToken(token);
 	}
 })();
 
-optioBot.on(Events.InteractionCreate, async (interaction: any) => { //TODO: Extends type because WTF
+optioBot.on(Events.InteractionCreate, async (interaction) => { //TODO: Extends type because WTF
     // interaction.reply("Pong!")
-	console.log(interaction.commandName);
+
+	// let interactionTyped: Discord.ChatInputCommandInteraction = interaction as Discord.ChatInputCommandInteraction;
+
+	console.log({interaction});
+	// console.log("OPTIONS", interaction.options);
 
 	try {
-
-		if(interaction.commandName === "ping") {
-			interaction.reply("Pong!")
-		} else if (interaction.commandName === "get_free_game") {
-			const messages = await getFreeGameMessages()
-			console.log({messages});
-			interaction.reply({embeds: messages})
-		}
-
+		handleCommand(interaction as Discord.ChatInputCommandInteraction);
 	} catch (err: any) {
-		// console.error(err);
-		console.error(err.rawError.errors.data.embeds);
+		console.error(err);
+		// console.error(err.rawError.errors.data.embeds);
 	}
 
 });
+
+const handleCommand = async (commandInteraction: Discord.ChatInputCommandInteraction) => {
+	try {
+		if(commandInteraction.commandName === "ping") {
+			commandInteraction.reply("Pong!")
+		} else if (commandInteraction.commandName === "get_free_game") {
+			
+			console.log("OPTIONs", commandInteraction.options.data)
+
+			const option = commandInteraction.options.data.find(option => option.name == "category") ?? {value: "all_free_games"}
+
+			const messages = await getFreeGameMessages(option.value as FreeGameCommandChoice)
+			console.log({messages});
+			commandInteraction.reply({embeds: messages})
+		}
+
+	} catch (err: any) {
+		console.error(err);
+		// console.error(err.rawError.errors.data.embeds);
+	}
+}
 
 optioBot.login(token);
 
