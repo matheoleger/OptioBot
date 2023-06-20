@@ -1,11 +1,14 @@
 {
   "name": "optiobot",
   "version": "1.0.0",
-  "description": "A bot for the server of \"La guilde de Smoowy\"",
+  "description": "A bot for the server \"La guilde de Smoowy\"",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node dist/app.js"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "repository": {
     "type": "git",
@@ -18,9 +21,15 @@
   },
   "homepage": "https://github.com/matheoleger/OptioBot#readme",
   "dependencies": {
+    "@types/lodash": "^4.14.194",
     "axios": "^0.27.2",
-    "discord.js": "^13.7.0",
+    "cron": "^2.3.1",
+    "discord.js": "^14.9.0",
     "dotenv": "^16.0.1",
+    "lodash": "^4.17.21",
     "lowdb": "github:dankreiger/lowdb#chore/esm-cjs-hybrid-WITH-LIB"
+  },
+  "devDependencies": {
+    "@types/cron": "^2.0.1"
   }
 }
