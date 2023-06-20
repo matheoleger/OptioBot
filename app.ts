@@ -1,5 +1,6 @@
 import * as dotenv from "dotenv";
 import * as Discord from "discord.js"
+import {CronJob} from "cron";
 import { clientId, guildId } from "./src/config.json"
 import * as database from "./data/db.json"
 
@@ -17,17 +18,20 @@ const token = process.env.DISCORD_TOKEN ?? "";
 
 optioBot.on('ready', () => {
     console.log(`Logged in as ${optioBot!.user!.tag}!`);
-    // sendFreeGameAnnouncementMessage();
-	handleFreeGameAnnouncement();
 });
 
+// Cron jobs
+const freeGameAnnouncementJob = new CronJob('00 30 17 * * *', handleFreeGameAnnouncement)
+freeGameAnnouncementJob.start();
+
+
+// https://discordjs.guide/creating-your-bot/command-deployment.html#guild-commands
 const commands = [];
 
 commands.push(pingCommand.data.toJSON());
 commands.push(getFreeGameCommand.data.toJSON());
 commands.push(trollCommand.data.toJSON());
 
-// https://discordjs.guide/creating-your-bot/command-deployment.html#guild-commands
 
 const rest = new REST().setToken(token);
 
@@ -44,12 +48,11 @@ const rest = new REST().setToken(token);
 
 		console.log(`Successfully reloaded ${(data as any[]).length} application (/) commands.`);
 	} catch (error) {
-		// And of course, make sure you catch and log any errors!
 		console.error(error);
 	}
 })();
 
-optioBot.on(Events.InteractionCreate, async (interaction) => { //TODO: Extends type because WTF
+optioBot.on(Events.InteractionCreate, async (interaction) => {
 	try {
 		handleCommand(interaction as Discord.ChatInputCommandInteraction);
 	} catch (err: any) {

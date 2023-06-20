@@ -1,6 +1,5 @@
-import {ChatInputCommandInteraction, TextChannel} from "discord.js"
+import {ChatInputCommandInteraction} from "discord.js"
 import { Low, JSONFile } from 'lowdb'
-import { fileURLToPath } from 'url'
 
 import {freeGameMessage} from "../../templates/freeGameMessage"
 import { getFreeGameFromEpic } from "../../utils/api"
@@ -56,65 +55,20 @@ export const handleFreeGameCommand = async (categoryChoice: FreeGameCommandChoic
     commandInteraction.reply({embeds: messages})
 }
 
-// export const getFreeGameMessages = async (categoryChoice: FreeGameCommandChoice) => {
-//     await db.read();
-
-//     const isAlreadyCalled = await getIsAlreadyCalled();
-
-//     let freeGames = db.data?.games;
-
-//     if(!isAlreadyCalled || !freeGames || !freeGames.length) {
-//         const freeGamesFromEpic = await getFreeGameFromEpic();
-//         freeGames = formatFreeGames(freeGamesFromEpic);
-//         await changeDatabaseGames(freeGames);
-//     }
-
-//     const filteredFreeGames = getFilteredFreeGames(freeGames, categoryChoice);
-
-//     const messages = filteredFreeGames.map((game) => freeGameMessage(game.title, game.id, game.image, game.startDate, game.endDate, game.category))
-
-//     return messages;
-// }
-
 export const getFreeGameMessages = (games: Game[]) => {
-    // await db.read();
-
-    // const isAlreadyCalled = await getIsAlreadyCalled();
-
-    // let freeGames = db.data?.games;
-
-    // if(!isAlreadyCalled || !freeGames || !freeGames.length) {
-    //     const freeGamesFromEpic = await getFreeGameFromEpic();
-    //     freeGames = formatFreeGames(freeGamesFromEpic);
-    //     await changeDatabaseGames(freeGames);
-    // }
-
-    // const filteredFreeGames = getFilteredFreeGames(freeGames, categoryChoice);
-
     const messages = games.map((game) => freeGameMessage(game.title, game.id, game.image, game.startDate, game.endDate, game.category))
-
     return messages;
 }
 
 const getIsAlreadyCalled = async () => {
-    // await db.read();
-
     const currentDate = new Date();
-    const changeTime = 17;
+    const changeHour = 17;
 
-    if(!db.data?.lastGamesUpdateTime) {
-        db.data!.lastGamesUpdateTime = currentDate.toISOString();
-        await db.write();
-        
-        return false;
-    }
+    if(!db.data?.lastGamesUpdateTime) return false;
 
     if(getIsDatesAreOnSameDay(new Date(db.data?.lastGamesUpdateTime), currentDate)
-    && currentDate.getHours() <= changeTime) 
+    && currentDate.getHours() <= changeHour) 
         return true;
-
-    db.data!.lastGamesUpdateTime = currentDate.toISOString();
-    await db.write();
 
     return false;
 }
@@ -162,6 +116,7 @@ const getFilteredFreeGames = (freeGames: Game[], category: FreeGameCommandChoice
 
 const changeDatabaseGames = async (freeGames: Game[]) => {
     db.data!.games = freeGames;
+    db.data!.lastGamesUpdateTime = new Date().toISOString();
     await db.write()
 
     return freeGames;

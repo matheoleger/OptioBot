@@ -1,6 +1,37 @@
 {
   "lastGamesUpdateTime": "2023-06-20T11:10:06.719Z",
   "games": [
-
+    {
+      "category": "upcoming_free_games",
+      "title": "Idle Champions of the Forgotten Realms",
+      "id": "a9748abde1c94b66aae5250bb9fc5503",
+      "image": "https://cdn1.epicgames.com/offer/7e508f543b05465abe3a935960eb70ac/IdleChampions_FreeGamesPromo_1200x16001_1200x1600-764258f78394b9f79815bbd9010e8454",
+      "startDate": "2023-06-22T15:00:00.000Z",
+      "endDate": "2023-06-29T15:00:00.000Z"
+    },
+    {
+      "category": "upcoming_free_games",
+      "title": "theHunter: Call of the Wild™",
+      "id": "7b0d120a875547e9bec70192ddcc96e2",
+      "image": "https://cdn1.epicgames.com/salesEvent/salesEvent/EGS_theHunterCalloftheWild_ExpansiveWorlds_S2_1200x1600-1e9b46aaabc33fe0a08cf5b418e76ba2",
+      "startDate": "2023-06-22T15:00:00.000Z",
+      "endDate": "2023-06-29T15:00:00.000Z"
+    },
+    {
+      "category": "currently_free_games",
+      "title": "Guacamelee! Super Turbo Championship Edition",
+      "id": "825a2a7eb70b458ab5b3cd9f5b3fa014",
+      "image": "https://cdn1.epicgames.com/spt-assets/7041a1ca4ed543459b95d78887047bd9/guacamelee-stce-ztldk.jpg",
+      "startDate": "2023-06-15T15:00:00.000Z",
+      "endDate": "2023-06-22T15:00:00.000Z"
+    },
+    {
+      "category": "currently_free_games",
+      "title": "Guacamelee! 2",
+      "id": "f7aa0e57c2b94acd97a28a7ec99a7ded",
+      "image": "https://cdn1.epicgames.com/spt-assets/b05acd7d28d34f6d93a961b0e53ddf0b/guacamelee-2-1lym2.jpg",
+      "startDate": "2023-06-15T15:00:00.000Z",
+      "endDate": "2023-06-22T15:00:00.000Z"
+    }
   ]
 }
