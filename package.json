@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node dist/app.js",
-    "build": "yarn install && tsc"
+    "tsc": "npx tsc",
+    "build": "yarn install && yarn run tsc"
   },
   "engines": {
     "node": ">=18"
@@ -31,6 +32,7 @@
     "lowdb": "github:dankreiger/lowdb#chore/esm-cjs-hybrid-WITH-LIB"
   },
   "devDependencies": {
-    "@types/cron": "^2.0.1"
+    "@types/cron": "^2.0.1",
+    "typescript": "^5.1.3"
   }
 }
