@@ -1,4 +1,4 @@
-import { APIEmbed, EmbedBuilder, EmbedType } from "discord.js";
+import { EmbedBuilder } from "discord.js";
 import {dateToFrenchLanguage} from "../utils"
 
 export const freeGameMessage = (name: string, id: string, image: string, startDate: string, endDate: string, category: FreeGameCategory) => {

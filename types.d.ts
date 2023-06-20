@@ -5,7 +5,6 @@
 // }
 
 
-
 //Type for data from db : an array "games" of objects with properties.
 type DataFromDB = {
     // [index: string]: Function|string|number,

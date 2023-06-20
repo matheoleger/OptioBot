@@ -16,16 +16,4 @@ export const getFreeGameCommand = {
                     { name: 'Actuellement gratuit', value: 'currently_free_games' },
                     { name: 'Prochainement gratuit', value: 'upcoming_free_games' },
                 ))
-    // async execute(interaction: any) {
-    //     await interaction.reply(await getFreeGameMessages())
-    // }
 }
-
-// export const getUpcomingFreeGameCommand = {
-//     data: new SlashCommandBuilder()
-//         .setName("get_upcoming_free_game")
-//         .setDescription("Get free game list (from Epic Game Store) !"),
-//     // async execute(interaction: any) {
-//     //     await interaction.reply(await getFreeGameMessages())
-//     // }
-// }

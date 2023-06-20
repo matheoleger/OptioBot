@@ -2,13 +2,9 @@ import {TextChannel} from "discord.js"
 import { Low, JSONFile } from 'lowdb'
 import { fileURLToPath } from 'url'
 
-import {optioBot} from "../../utils/discordBotServices"
 import {freeGameMessage} from "../../templates/freeGameMessage"
-import { sendFreeGameMessage } from "./sendFreeGameMessage"
 import { getFreeGameFromEpic } from "../../utils/api"
 import { getIsDatesAreOnSameDay } from "../../utils"
-
-const axios = require('axios').default;
 
 // Use JSON file for storage
 const file = "./data/db.json";

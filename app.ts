@@ -6,6 +6,7 @@ import {optioBot} from "./src/utils/discordBotServices"
 import { getFreeGameFromEpic } from "./src/utils/api";
 import { Collection, Events, REST, Routes } from "discord.js";
 import { getFreeGameMessages } from "./src/services/freeGame/getFreeGame";
+import { trollCommand } from "./src/commands/troll";
 
 import { getFreeGameCommand, pingCommand } from "./src/commands"
 
@@ -22,7 +23,7 @@ const commands = [];
 
 commands.push(pingCommand.data.toJSON());
 commands.push(getFreeGameCommand.data.toJSON());
-// commands.push(getUpcomingFreeGameCommand.data.toJSON());
+commands.push(trollCommand.data.toJSON());
 
 // https://discordjs.guide/creating-your-bot/command-deployment.html#guild-commands
 
@@ -59,10 +60,18 @@ const handleCommand = async (commandInteraction: Discord.ChatInputCommandInterac
 	try {
 		if(commandInteraction.commandName === "ping") {
 			commandInteraction.reply("Pong!")
-		} else if (commandInteraction.commandName === "get_free_game") {			
-			const option = commandInteraction.options.data.find(option => option.name == "category") ?? {value: "all_free_games"}
+		} else if (commandInteraction.commandName === "get_free_game") {		
 
-			const messages = await getFreeGameMessages(option.value as FreeGameCommandChoice)
+			if(commandInteraction.channelId !== "928407823145136149") { // TODO: set constant instead of string here
+				commandInteraction.reply({content: "Pour éviter le spam des autres salons, cette commande n'est autorisé que dans le salon <#928407823145136149> :wink:", ephemeral: true})
+				return;
+			}
+
+			// const option = commandInteraction.options.data.find(option => option.name == "category") ?? {value: "all_free_games"}
+
+			const option = commandInteraction.options.getString("category");
+
+			const messages = await getFreeGameMessages(option as FreeGameCommandChoice)
 			console.log({messages});
 			commandInteraction.reply({embeds: messages})
 		}
