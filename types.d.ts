@@ -8,7 +8,7 @@
 //Type for data from db : an array "games" of objects with properties.
 type DataFromDB = {
     // [index: string]: Function|string|number,
-    servers: {[key: string]: string}[],
+    // servers: {[key: string]: string}[],
     lastGamesUpdateTime?: string,
     games: Game[],
 }

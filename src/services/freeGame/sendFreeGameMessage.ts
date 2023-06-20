@@ -2,27 +2,30 @@ import { ChannelType, TextChannel } from "discord.js";
 import { optioBot } from "../../utils/discordBotServices";
 import { JSONFile, Low } from "lowdb";
 import { freeGameMessage } from "../../templates/freeGameMessage";
+import { getFreeGameMessages } from "./getFreeGame";
 
 // Use JSON file for storage
 const file = "./data/db.json";
 const adapter = new JSONFile<DataFromDB>(file)
 const db = new Low(adapter)
 
-export const sendFreeGameMessage = async () => {
+export const sendFreeGameAnnouncementMessage = async () => {
     await db.read()
 
     if(!db.data) return;
 
-    db.data.servers.forEach((server: any) => {
-        const guild = optioBot.guilds.cache.get(server.serverID);
-        const channel = (guild) ? guild.channels.cache.get(server.freeGameChannelID) : undefined;
+    const serverID = process.env.SERVER_ID || "928046024843493456" 
+    const freeGameAnnouncementChannelID = process.env.FG_ANNOUNCEMENT_CHANNEL_ID || "1099779510796292216"
 
-        if(!channel) return;
+    const guild = optioBot.guilds.cache.get(serverID);
+    const channel = (guild) ? guild.channels.cache.get(freeGameAnnouncementChannelID) : undefined;
 
-        if(channel.type == ChannelType.GuildText && db.data) {
-            sendEachGameToChannel(channel, db.data.games)
-        }
-    })
+    if(!channel) return;
+
+    if(channel.type == ChannelType.GuildAnnouncement && db.data) {
+        const messages = await getFreeGameMessages("currently_free_games")
+        channel.send({ embeds: messages })
+    }
 }
 
 const sendEachGameToChannel = (channel: TextChannel, games: Game[]) => {

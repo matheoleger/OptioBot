@@ -1,14 +1,15 @@
 import * as dotenv from "dotenv";
 import * as Discord from "discord.js"
 import { clientId, guildId } from "./src/config.json"
+import * as database from "./data/db.json"
 
 import {optioBot} from "./src/utils/discordBotServices"
 import { getFreeGameFromEpic } from "./src/utils/api";
 import { Collection, Events, REST, Routes } from "discord.js";
 import { getFreeGameMessages } from "./src/services/freeGame/getFreeGame";
-import { trollCommand } from "./src/commands/troll";
 
-import { getFreeGameCommand, pingCommand } from "./src/commands"
+import { getFreeGameCommand, pingCommand, trollCommand } from "./src/commands"
+import { sendFreeGameAnnouncementMessage } from "./src/services/freeGame/sendFreeGameMessage";
 
 dotenv.config();
   
@@ -16,7 +17,7 @@ const token = process.env.DISCORD_TOKEN ?? "";
 
 optioBot.on('ready', () => {
     console.log(`Logged in as ${optioBot!.user!.tag}!`);
-    getFreeGameFromEpic();
+    sendFreeGameAnnouncementMessage();
 });
 
 const commands = [];
@@ -62,17 +63,15 @@ const handleCommand = async (commandInteraction: Discord.ChatInputCommandInterac
 			commandInteraction.reply("Pong!")
 		} else if (commandInteraction.commandName === "get_free_game") {		
 
-			if(commandInteraction.channelId !== "928407823145136149") { // TODO: set constant instead of string here
+			if(commandInteraction.channelId !== process.env.FG_COMMAND_CHANNEL_ID) {
 				commandInteraction.reply({content: "Pour éviter le spam des autres salons, cette commande n'est autorisé que dans le salon <#928407823145136149> :wink:", ephemeral: true})
 				return;
 			}
 
-			// const option = commandInteraction.options.data.find(option => option.name == "category") ?? {value: "all_free_games"}
-
 			const option = commandInteraction.options.getString("category");
 
 			const messages = await getFreeGameMessages(option as FreeGameCommandChoice)
-			console.log({messages});
+			// console.log({messages});
 			commandInteraction.reply({embeds: messages})
 		}
 

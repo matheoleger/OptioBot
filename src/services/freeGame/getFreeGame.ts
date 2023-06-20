@@ -11,22 +11,7 @@ const file = "./data/db.json";
 const adapter = new JSONFile<DataFromDB>(file)
 const db = new Low(adapter)
 
-// export const getFreeGameFromEpic = async () => {
-//     const response = await axios.get("https://store-site-backend-static.ak.epicgames.com/freeGamesPromotions?country=FR")
-//     // .then((res: any) => {
-//     //     console.log(res.data);
-//     //     compareGames(res.data.data.Catalog.searchStore.elements);
-//     // })
-//     // .catch((error: Error) => {
-//     //     console.log(error);
-//     // })
-
-//     const games = response.data.data.Catalog.searchStore.elements
-    
-//     return games;
-// } 
-
-export const getFreeGameMessages = async (choice: FreeGameCommandChoice) => {
+export const getFreeGameMessages = async (categoryChoice: FreeGameCommandChoice) => {
     await db.read();
 
     const isAlreadyCalled = await getIsAlreadyCalled();
@@ -34,16 +19,15 @@ export const getFreeGameMessages = async (choice: FreeGameCommandChoice) => {
     let freeGames = db.data?.games;
 
     if(!isAlreadyCalled || !freeGames || !freeGames.length) {
-        console.log("HEREEEEE");
         const freeGamesFromEpic = await getFreeGameFromEpic();
         freeGames = formatFreeGames(freeGamesFromEpic);
         await changeDatabaseGames(freeGames);
     }
 
     const filteredFreeGames = freeGames.filter(game => {
-        if(choice == "all_free_games") return true;
+        if(categoryChoice == "all_free_games") return true;
 
-        return game.category == choice;
+        return game.category == categoryChoice;
     })
 
     const messages = filteredFreeGames.map((game) => freeGameMessage(game.title, game.id, game.image, game.startDate, game.endDate, game.category))

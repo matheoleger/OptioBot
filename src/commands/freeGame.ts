@@ -1,6 +1,4 @@
 import { SlashCommandBuilder } from "discord.js";
-import { sendFreeGameMessage } from "../services/freeGame/sendFreeGameMessage";
-import { getFreeGameMessages } from "../services/freeGame/getFreeGame";
 
 // https://discordjs.guide/slash-commands/advanced-creation.html#option-types
 export const getFreeGameCommand = {
