@@ -88,3 +88,8 @@ type ImageFromEpic = {
 type FreeGameCategory = "currently_free_games" |  "upcoming_free_games"
 
 type FreeGameCommandChoice = FreeGameCategory | "all_free_games"
+
+enum FreeGameRequestType {
+    Command,
+    Announcement
+}

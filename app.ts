@@ -6,7 +6,7 @@ import * as database from "./data/db.json"
 import {optioBot} from "./src/utils/discordBotServices"
 import { getFreeGameFromEpic } from "./src/utils/api";
 import { Collection, Events, REST, Routes } from "discord.js";
-import { getFreeGameMessages } from "./src/services/freeGame/getFreeGame";
+import { getFreeGameMessages, handleFreeGameAnnouncement, handleFreeGameCommand } from "./src/services/freeGame";
 
 import { getFreeGameCommand, pingCommand, trollCommand } from "./src/commands"
 import { sendFreeGameAnnouncementMessage } from "./src/services/freeGame/sendFreeGameMessage";
@@ -17,7 +17,8 @@ const token = process.env.DISCORD_TOKEN ?? "";
 
 optioBot.on('ready', () => {
     console.log(`Logged in as ${optioBot!.user!.tag}!`);
-    sendFreeGameAnnouncementMessage();
+    // sendFreeGameAnnouncementMessage();
+	handleFreeGameAnnouncement();
 });
 
 const commands = [];
@@ -70,9 +71,7 @@ const handleCommand = async (commandInteraction: Discord.ChatInputCommandInterac
 
 			const option = commandInteraction.options.getString("category");
 
-			const messages = await getFreeGameMessages(option as FreeGameCommandChoice)
-			// console.log({messages});
-			commandInteraction.reply({embeds: messages})
+			await handleFreeGameCommand(option as FreeGameCommandChoice, commandInteraction);
 		}
 
 	} catch (err: any) {
