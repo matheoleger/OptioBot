@@ -13,3 +13,10 @@ export const dateToFrenchLanguage = (date: string): string => {
     
     return (formatDate.toLocaleDateString('fr-FR', options));
 }
+
+export const getIsDatesAreOnSameDay = (firstDate: Date, secondDate: Date) => {
+    return (firstDate.getFullYear() === secondDate.getFullYear() &&
+    firstDate.getMonth() === secondDate.getMonth() &&
+    firstDate.getDate() === secondDate.getDate());
+}
+

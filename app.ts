@@ -4,10 +4,10 @@ import { clientId, guildId } from "./src/config.json"
 
 import {optioBot} from "./src/utils/discordBotServices"
 import { getFreeGameFromEpic } from "./src/utils/api";
-import { getFreeGameCommand } from "./src/commands/freeGame";
 import { Collection, Events, REST, Routes } from "discord.js";
-import { pingCommand } from "./src/commands/ping";
 import { getFreeGameMessages } from "./src/services/freeGame/getFreeGame";
+
+import { getFreeGameCommand, pingCommand } from "./src/commands"
 
 dotenv.config();
   
@@ -47,18 +47,10 @@ const rest = new REST().setToken(token);
 })();
 
 optioBot.on(Events.InteractionCreate, async (interaction) => { //TODO: Extends type because WTF
-    // interaction.reply("Pong!")
-
-	// let interactionTyped: Discord.ChatInputCommandInteraction = interaction as Discord.ChatInputCommandInteraction;
-
-	console.log({interaction});
-	// console.log("OPTIONS", interaction.options);
-
 	try {
 		handleCommand(interaction as Discord.ChatInputCommandInteraction);
 	} catch (err: any) {
 		console.error(err);
-		// console.error(err.rawError.errors.data.embeds);
 	}
 
 });
@@ -67,10 +59,7 @@ const handleCommand = async (commandInteraction: Discord.ChatInputCommandInterac
 	try {
 		if(commandInteraction.commandName === "ping") {
 			commandInteraction.reply("Pong!")
-		} else if (commandInteraction.commandName === "get_free_game") {
-			
-			console.log("OPTIONs", commandInteraction.options.data)
-
+		} else if (commandInteraction.commandName === "get_free_game") {			
 			const option = commandInteraction.options.data.find(option => option.name == "category") ?? {value: "all_free_games"}
 
 			const messages = await getFreeGameMessages(option.value as FreeGameCommandChoice)
@@ -80,7 +69,6 @@ const handleCommand = async (commandInteraction: Discord.ChatInputCommandInterac
 
 	} catch (err: any) {
 		console.error(err);
-		// console.error(err.rawError.errors.data.embeds);
 	}
 }
 

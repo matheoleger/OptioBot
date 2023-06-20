@@ -6,6 +6,7 @@ import {optioBot} from "../../utils/discordBotServices"
 import {freeGameMessage} from "../../templates/freeGameMessage"
 import { sendFreeGameMessage } from "./sendFreeGameMessage"
 import { getFreeGameFromEpic } from "../../utils/api"
+import { getIsDatesAreOnSameDay } from "../../utils"
 
 const axios = require('axios').default;
 
@@ -30,14 +31,20 @@ const db = new Low(adapter)
 // } 
 
 export const getFreeGameMessages = async (choice: FreeGameCommandChoice) => {
-    const games = await getFreeGameFromEpic();
+    await db.read();
 
-    const isSameData = await getIsSameFreeGame(games);
+    const isAlreadyCalled = await getIsAlreadyCalled();
 
-    const freeGamesData = await changeDataOfDB(games);
+    let freeGames = db.data?.games;
 
-    const filteredFreeGames = freeGamesData.filter(game => {
+    if(!isAlreadyCalled || !freeGames || !freeGames.length) {
+        console.log("HEREEEEE");
+        const freeGamesFromEpic = await getFreeGameFromEpic();
+        freeGames = formatFreeGames(freeGamesFromEpic);
+        await changeDatabaseGames(freeGames);
+    }
 
+    const filteredFreeGames = freeGames.filter(game => {
         if(choice == "all_free_games") return true;
 
         return game.category == choice;
@@ -48,39 +55,31 @@ export const getFreeGameMessages = async (choice: FreeGameCommandChoice) => {
     return messages;
 }
 
-const getIsSameFreeGame = async (freeGames: any[]) => {
-    await db.read();
-    console.log(db.data);
+const getIsAlreadyCalled = async () => {
+    // await db.read();
 
-    let isSameData = false;
+    const currentDate = new Date();
+    const changeTime = 17;
 
-    //If db.data is null we do just an empty array "games"
-    // db.data ||= {servers: [], games: []}
-
-    if(db.data == null || db.data == undefined) {
-        return;
+    if(!db.data?.lastGamesUpdateTime) {
+        db.data!.lastGamesUpdateTime = currentDate.toISOString();
+        await db.write();
+        
+        return false;
     }
 
-    const gamesFromDB = db.data.games
+    if(getIsDatesAreOnSameDay(new Date(db.data?.lastGamesUpdateTime), currentDate)
+    && currentDate.getHours() <= changeTime) 
+        return true;
 
-    // for(let i = 0; i < freeGames.length; i++) {
-    //     // isSameData = (freeGames[i].title == db.data.games[i].title) ? true : false;
+    db.data!.lastGamesUpdateTime = currentDate.toISOString();
+    await db.write();
 
-    //     if(freeGames[i].title != db.data.games[i].title) {
-    //         // await changeDataOfDB(freeGames);
-    //         // await sendFreeGameMessage();
-    //     }
-    // }
-
-    freeGames.filter((game) => gamesFromDB.includes(game))
+    return false;
 }
 
-const changeDataOfDB = async (freeGames: {[key: string]: any}[]) => {
-    db.data!.games = [];
-
-    let essentialDataOfFreeGames: Game[] = []
-
-    freeGames.forEach((game) => { //TODO: change to .map(), refacto types
+const formatFreeGames = (gamesFromEpic: GameFromEpic[]) => {
+    const formattedFreeGames = gamesFromEpic.filter((game) => game.promotions).map((game) => {
         let essentialData: Game = {
             category: "currently_free_games",
             title: game.title as string,
@@ -89,8 +88,6 @@ const changeDataOfDB = async (freeGames: {[key: string]: any}[]) => {
             startDate: "",
             endDate: "",
         }
-
-        if(!game.promotions) return;
 
         if(game.promotions.upcomingPromotionalOffers.length) {
             essentialData.startDate = game.promotions.upcomingPromotionalOffers[0].promotionalOffers[0].startDate
@@ -102,13 +99,17 @@ const changeDataOfDB = async (freeGames: {[key: string]: any}[]) => {
             essentialData.category = "currently_free_games"           
         }
 
-        essentialDataOfFreeGames.push(essentialData)
-    })
+        return essentialData;
+    });
 
-    db.data!.games = essentialDataOfFreeGames;
+    return formattedFreeGames;
+}
+
+const changeDatabaseGames = async (freeGames: Game[]) => {
+    db.data!.games = freeGames;
     await db.write()
 
-    return essentialDataOfFreeGames;
+    return freeGames;
 }
 
 const getImage = (keyImages: ImageFromEpic[]) => {
