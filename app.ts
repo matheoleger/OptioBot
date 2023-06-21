@@ -12,8 +12,15 @@ import {
 
 import { getFreeGameCommand, pingCommand, trollCommand } from "./src/commands";
 import { freeGameAnnouncementJob, keepBotAliveJob } from "./src/services/cronJob";
+import express, { Request, Response } from "express";
 
 dotenv.config();
+
+const app = express();
+const port = 3000;
+
+app.get('/', (req: Request , res: Response) => res.send('Hello World!'));
+app.listen(port, () => console.log(`App listening at http://localhost:${port} for a useless webserver`));
 
 const token = process.env.DISCORD_TOKEN ?? "";
 
