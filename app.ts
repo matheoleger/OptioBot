@@ -3,7 +3,7 @@ import * as Discord from "discord.js";
 import { CronJob } from "cron";
 import { clientId, guildId } from "./src/config.json";
 
-import { optioBot } from "./src/utils/discordBotServices";
+import { optioBot, setBotActivity } from "./src/utils/discordBotServices";
 import { Events, REST, Routes } from "discord.js";
 import {
   handleFreeGameAnnouncement,
@@ -11,6 +11,7 @@ import {
 } from "./src/services/freeGame";
 
 import { getFreeGameCommand, pingCommand, trollCommand } from "./src/commands";
+import { freeGameAnnouncementJob, keepBotAliveJob } from "./src/services/cronJob";
 
 dotenv.config();
 
@@ -18,14 +19,11 @@ const token = process.env.DISCORD_TOKEN ?? "";
 
 optioBot.on("ready", () => {
   console.log(`Logged in as ${optioBot!.user!.tag}!`);
-});
 
-// Cron jobs
-const freeGameAnnouncementJob = new CronJob(
-  "00 30 17 * * *",
-  handleFreeGameAnnouncement
-);
-freeGameAnnouncementJob.start();
+  //Start cron jobs
+  freeGameAnnouncementJob.start();
+  keepBotAliveJob.start();
+});
 
 // https://discordjs.guide/creating-your-bot/command-deployment.html#guild-commands
 const commands = [];
