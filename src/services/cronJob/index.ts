@@ -1,2 +1,2 @@
 export * from "./freeGameAnnouncement";
-export * from "./keepBotAlive";
+export * from "./changeBotActivity";

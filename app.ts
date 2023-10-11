@@ -11,7 +11,7 @@ import {
 } from "./src/services/freeGame";
 
 import { getFreeGameCommand, pingCommand, trollCommand } from "./src/commands";
-import { freeGameAnnouncementJob, keepBotAliveJob } from "./src/services/cronJob";
+import { freeGameAnnouncementJob, changeBotActivity } from "./src/services/cronJob";
 import express, { Request, Response } from "express";
 
 dotenv.config();
@@ -29,7 +29,7 @@ optioBot.on("ready", () => {
 
   //Start cron jobs
   freeGameAnnouncementJob.start();
-  keepBotAliveJob.start();
+  changeBotActivity.start();
 });
 
 // https://discordjs.guide/creating-your-bot/command-deployment.html#guild-commands
