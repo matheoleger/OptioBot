@@ -13,5 +13,5 @@ jobs:
       with:
         server: FTPserver.lanapertureserver.fr
         server-dir: /home/lanayr/Documents/DiscordBotSmoowy/repo/
-        username: ${{ secrets.ftp_username }}
-        password: ${{ secrets.ftp_password }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
