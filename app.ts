@@ -1,26 +1,17 @@
 import * as dotenv from "dotenv";
 import * as Discord from "discord.js";
-import { CronJob } from "cron";
 import { clientId, guildId } from "./src/config.json";
 
-import { optioBot, setBotActivity } from "./src/utils/discordBotServices";
+import { optioBot } from "./src/utils/discordBotServices";
 import { Events, REST, Routes } from "discord.js";
 import {
-  handleFreeGameAnnouncement,
   handleFreeGameCommand,
 } from "./src/services/freeGame";
 
 import { getFreeGameCommand, pingCommand, trollCommand } from "./src/commands";
 import { freeGameAnnouncementJob, changeBotActivity } from "./src/services/cronJob";
-import express, { Request, Response } from "express";
 
 dotenv.config();
-
-const app = express();
-const port = 3000;
-
-app.get('/', (req: Request , res: Response) => res.send('Hello World!'));
-app.listen(port, () => console.log(`App listening at http://localhost:${port} for a useless webserver`));
 
 const token = process.env.DISCORD_TOKEN ?? "";
 

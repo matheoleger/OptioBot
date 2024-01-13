@@ -5,7 +5,6 @@ import { optioBot, setBotActivity } from "../../utils/discordBotServices";
 let activityIndexIterator = 0;
 
 export const changeBotActivity = new CronJob("0 */10 * * * *", () => {
-
     const activityNames =  [
       "Smoowy coder un autre bot... QUOI ?!",
       "les magnifiques personnes de ce serveur",
