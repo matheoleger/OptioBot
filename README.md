@@ -1,13 +1,12 @@
 # OptioBot
-A bot for the server of "La guilde de Smoowy"
 
+A Discord bot for the server "La guilde de Smoowy"
 
 # Run the project on local
 
 - You need a `.env` that respects the `.env.example`.
 - You need to have **Node >18.x** and run `yarn install`
 - Now you can run the project with `yarn start`
-
 
 # Docker
 
@@ -21,7 +20,7 @@ docker build -t optio-bot .
 
 ```
 
-The you have to create the container :
+Then, you have to create the container :
 
 ```bash
 
