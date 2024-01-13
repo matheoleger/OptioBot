@@ -16,6 +16,6 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: FTPserver.lanapertureserver.fr
-        server-dir: /home/lanayr/Documents/DiscordBotSmoowy/repo/
+        server-dir: DiscordBotSmoowy/
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
