@@ -1,7 +1,7 @@
 on: push
-name: 🚀 Deploy Optio on push to the Lanaperture Server
+name: 🚀 Deploy OptioBot on push to the Lanaperture Server
 jobs:
-  web-deploy:
+  bot-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
