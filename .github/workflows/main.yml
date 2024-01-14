@@ -25,4 +25,5 @@ jobs:
       with:
         url: "https://requestshandler.lanapertureserver.fr/optiobot-confirm-deployment"
         method: 'POST'
+        contentType: 'application/json'
         data: '{"sync_file": "done"}'
