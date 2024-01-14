@@ -1,7 +1,4 @@
-on:  
-  push:
-    branches:
-      - main
+on: push
 
 name: 🚀 Deploy OptioBot on push to the Lanaperture Server
 jobs:
@@ -25,4 +22,5 @@ jobs:
       with:
         url: "https://requestshandler.lanapertureserver.fr/optiobot-confirm-deployment"
         method: 'POST'
+        contentType: 'application/json'
         data: '{"sync_file": "done"}'
