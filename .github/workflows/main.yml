@@ -1,4 +1,7 @@
-on: push
+on:  
+  push:
+    branches:
+      - main
 
 name: 🚀 Deploy OptioBot on push to the Lanaperture Server
 jobs:
