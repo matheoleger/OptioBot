@@ -19,7 +19,8 @@ jobs:
         server-dir: DiscordBotSmoowy/
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-    - name: Send post confirmation
+        
+    - name: ✅ Send sync files confirmation
       uses: fjogeleit/http-request-action@v1
       with:
         url: "https://requestshandler.lanapertureserver.fr/optiobot-confirm-deployment"
